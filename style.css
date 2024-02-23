@@ -19,6 +19,7 @@ body{
 }
 .container h1{
     text-transform: uppercase;
+    text-align: center;
 }
 form{
     display: flex;
@@ -28,7 +29,7 @@ form{
     border: 2px solid #000;
     padding: 20px;
     border-radius: 20px;
-    background-color: grey;
+    background-color: #bdcebe;
 
 }
 
@@ -44,7 +45,7 @@ form input{
     font-size: 20px;
     border-radius: 20px;
 }
-form .form-ele:nth-child(-n+3) input{
+form .form-ele:nth-child(-n+5) input{
     width: 100%;
 }
 input:focus{
@@ -52,9 +53,10 @@ input:focus{
     outline: none;
 }
 .btn input{
-    padding: 10px 20px;
+    padding: 10px 30px;
     font-size: 20px;
     color: #fff;
+    background-color: #000;
 }
 .image img{
     width: 100%;
