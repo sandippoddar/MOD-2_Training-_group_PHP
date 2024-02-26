@@ -1,4 +1,5 @@
 <!-- php code for Task 2 -->
+
 <?php
 
     $targetFile= "";
@@ -16,16 +17,43 @@
 ?>
 
 <!-- php code for Task 1 -->
+
 <?php
     $full_name="";
     if (isset($_SERVER["REQUEST_METHOD"])=="POST") {
         if (isset($_POST['submit']))
         {
-            $first_name = htmlspecialchars($_POST['first_name']);
+            $first_name = $_POST['first_name'];
             $last_name = $_POST['last_name'];
             $full_name = $first_name . ' ' . $last_name;
         }
     }
+?>
+
+<!-- php code  for Task 3 -->
+
+<?php
+$marksTable = '';
+
+if (isset($_POST['submit'])) {
+    $flag=0;
+    $marksTable .= "<h2>Marks Table</h2>";
+    $marksTable .= "<table border='1'style='width: 100%;'>";
+    $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
+    $marks = explode("\n", $_POST['table']);
+    foreach ($marks as $mark) {
+        $marks_array = explode("|", $mark);
+        if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
+            $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
+        } 
+        else{
+            $flag=1;
+            continue;
+        }
+    }
+
+    $marksTable .= "</table>";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,21 +67,25 @@
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
                 <label for = "first_name">First Name:</label>
-                <input type = "text" name = "first_name" id = "first_name" pattern="[A-Za-z]+" required>
+                <input type = "text" name = "first_name" id = "first_name" maxlength="20" pattern="[A-Za-z]+" required>
                 <p class="wrong_fname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "last_name">Last name:</label>
-                <input type = "text" name = "last_name" id = "last_name" pattern="[A-Za-z]+" required>
+                <input type = "text" name = "last_name" id = "last_name" maxlength="20" pattern="[A-Za-z]+" required>
                 <p class="wrong_lname"></p>
+            </div>
+            <div class = "form-ele">
+                <label for = "full_name"> Full Name: </label>
+                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
             </div>
             <div class="form-ele">
                 <label for="image">Enter Image</label>
                 <input type="file" name="image" id="image">
             </div>
-            <div class = "form-ele">
-                <label for = "full_name"> Full Name: </label>
-                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
+            <div class="form-ele">
+                <label for="table">Enter Marks (Subject|Marks):</label>
+                <textarea name="table" id="table" cols="30" rows="5"></textarea>
             </div>
             <div class = "form-ele btn">
                 <input type = "submit" name = "submit" value="Submit">
@@ -77,7 +109,18 @@
                 }
             ?> 
         </h1>
+        <div class="table">
+            <?php 
+                if($_POST["table"]!=NULL)
+                {
+                    echo $marksTable;
+                } 
+                if($flag == 1){
+                    echo "Entered records are not Correct";
+                }
+            ?>
+        </div>
     </div>
-<script src = "script.js"></script>
+    <script src = "script.js"></script>
 </body>
 </html>
