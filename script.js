@@ -4,6 +4,7 @@ const last_name = document.querySelector("#last_name");
 let full_name = document.querySelector("#full_name");
 full_name.value = "";
 let regex = /^[a-zA-Z]+$/;
+// for showing error message whenever i enter values other than alphabets
 first_name.addEventListener('input',()=> {
     if (first_name.value === "") {
         document.querySelector(".wrong_fname").textContent = "";

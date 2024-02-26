@@ -1,8 +1,8 @@
+<!-- php code for Task 2 -->
 <?php
 
     $targetFile= "";
     if (isset($_POST["submit"])) {
-
         $file = $_FILES['image'];
         $targetDir="img/";
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
@@ -12,10 +12,10 @@
         if ($file_type == "jpg" || $file_type == "jpeg" || $file_type == "png") {
             move_uploaded_file($tmp_name,$targetFile);
         }
-        
-
     }
 ?>
+
+<!-- php code for Task 1 -->
 <?php
     $full_name="";
     if (isset($_SERVER["REQUEST_METHOD"])=="POST") {
@@ -60,6 +60,7 @@
             </div>
 
         </form>
+        <!-- display image here Task 2-->
         <div class="image">
             <img src="<?php 
             
@@ -68,6 +69,7 @@
                  }
             ?>" alt="">
         </div>
+        <!-- display user name here Task 1 -->
         <h1> 
             <?php 
                 if (isset($_POST['submit'])) {
