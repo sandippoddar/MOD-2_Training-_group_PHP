@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-ele">
                 <label for="phone">Enter Phone No. (+91)</label>
-                <input type="text" name="phone" id="phone" maxlength="13">
+                <input type="text" name="phone" id="phone">
             </div>
             <div class="form-ele">
                 <label for="table">Enter Marks (Subject|Marks):</label>
