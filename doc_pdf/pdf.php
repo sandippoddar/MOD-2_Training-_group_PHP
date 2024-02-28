@@ -35,21 +35,21 @@
     $pdf = new Fpdf();
     $pdf -> AddPage();
     $pdf -> SetFont('Arial', 'B', 16);
-    $pdf -> Cell(0, 10, "PHP Basic Assignment", 1, 1, 'C');
-    $pdf -> Cell(20, 10, "NAME: ", 0, 0, 'L');
-    $pdf -> Cell(0, 10, strtoupper($full_name), 0, 1, 'L');
-    $pdf -> Cell(50, 10, "PHONE NUMBER: ", 0, 0, 'L');
-    $pdf -> Cell(0, 10, $phnumber, 0, 1, 'L');
-    $pdf -> Cell(40, 10, "USER EMAIL: ", 0, 0, 'L');
-    $pdf -> Cell(0, 10, $email, 0, 1, 'L');
-    $pdf -> cell(90, 10, "STUDENT TABLE", 1, 1, 'C');
-    $pdf -> Cell(45,10,"Subject",1,0, "C");
-    $pdf -> Cell(45,10,"Subject",1,1, "C");
+    $pdf -> Cell(0, 20, "PHP Basic Assignment", 1, 1, 'C');
+    $pdf -> Cell(20, 20, "NAME: ", 0, 0, 'L');
+    $pdf -> Cell(0, 20, strtoupper($full_name), 0, 1, 'L');
+    $pdf -> Cell(50, 20, "PHONE NUMBER: ", 0, 0, 'L');
+    $pdf -> Cell(0, 20, $phnumber, 0, 1, 'L');
+    $pdf -> Cell(40, 20, "USER EMAIL: ", 0, 0, 'L');
+    $pdf -> Cell(0, 20, $email, 0, 1, 'L');
+    $pdf -> cell(0, 20, "STUDENT TABLE", 1, 1, 'C');
+    $pdf -> Cell(100,15,"Subject",1,0, "C");
+    $pdf -> Cell(0,15,"Marks",1,1, "C");
     foreach( $marks_array as $mark ) {
         $marks = explode("|", $mark);
-        $pdf->Cell(45,10,$marks[0],1,0, "C");
-        $pdf->Cell(45,10,$marks[1],1,1, "C");
+        $pdf->Cell(100,10,$marks[0],1,0, "C");
+        $pdf->Cell(0,10,$marks[1],1,1, "C");
     }
-    $pdf-> Image($targetFile,130,25,50,50);
+    $pdf-> Image($targetFile,150,35,50,50);
     $pdf->Output();
 ?>
