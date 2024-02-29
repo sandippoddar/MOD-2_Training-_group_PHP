@@ -51,7 +51,6 @@ if (isset($_POST['submit'])) {
             continue;
         }
     }
-
     $marksTable .= "</table>";
 }
 ?>
@@ -59,87 +58,82 @@ if (isset($_POST['submit'])) {
 <!-- php code for Task 4 -->
 
 <?php
-
-if (isset($_POST['submit'])) { 
-    $ph_flag=0;
-    $phnumber=$_POST['phone'];
-    if (preg_match('/^\+91[0-9]{10}$/',$phnumber)) {
-        $ph_flag=1;
-    }
-}
-
-
-?>
-
-<?php
-$email_flag = 0;
-$email="";
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $api_key = '1e78c4c89237488db4366aee49b9a7e7';
-        $ch = curl_init();
-        
-        curl_setopt_array($ch, [CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$api_key&email=$email", 
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET" 
-        ]);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $data = json_decode($response, true);
-        // echo var_dump($data);
-        if ($data['deliverability'] === "DELIVERABLE" && !$data["is_disposable_email"]["value"]){
-            // echo "Email address '$email' is considered valid.";
-            $email_flag = 1;
+    if (isset($_POST['submit'])) { 
+        $ph_flag=0;
+        $phnumber=$_POST['phone'];
+        if (preg_match('/^\+91[0-9]{10}$/',$phnumber)) {
+            $ph_flag=1;
         }
     }
-}
+?>
 
+<!-- PHP Code for Task 5 -->
+
+<?php
+    $email_flag = 0;
+    $email = "";
+    if (isset($_POST['submit'])) {
+        $email = $_POST['email'];
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $api_key = '1e78c4c89237488db4366aee49b9a7e7';
+            $ch = curl_init();
+            curl_setopt_array($ch, [CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$api_key&email=$email", 
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET" 
+            ]);
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $data = json_decode($response, true);
+            if ($data['deliverability'] === "DELIVERABLE" && !$data["is_disposable_email"]["value"]) {
+                $email_flag = 1;
+            }
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Form Example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel = "stylesheet" href = "style.css">
 </head>
 <body>
-    <div class="container">
+    <div class = "container">
         <form method = "post" action = "index.php" enctype="multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
                 <label for = "first_name">First Name:*</label>
                 <input type = "text" name = "first_name" id = "first_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class="wrong_fname"></p>
+                <p class = "wrong_fname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "last_name">Last name:*</label>
                 <input type = "text" name = "last_name" id = "last_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class="wrong_lname"></p>
+                <p class = "wrong_lname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "full_name"> Full Name: </label>
                 <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
             </div>
-            <div class="form-ele">
-                <label for="image">Enter Image</label>
-                <input type="file" name="image" id="image">
+            <div class = "form-ele">
+                <label for = "image">Enter Image</label>
+                <input type = "file" name = "image" id = "image">
             </div>
-            <div class="form-ele">
-                <label for="phone">Enter Phone No. (+91)</label>
-                <input type="text" name="phone" id="phone" maxlength="13">
+            <div class = "form-ele">
+                <label for = "phone">Enter Phone No. (+91)</label>
+                 <input type = "text" name = "phone" id="phone" maxlength="13">
             </div>
-            <div class="form-ele">
-                <label for="email">Enter User Email:</label>
-                <input type="text" name="email" id="email">
+            <div class = "form-ele">
+                <label for = "email">Enter User Email:</label>
+                <input type = "text" name = "email" id="email">
             </div>
-            <div class="form-ele">
-                <label for="table">Enter Marks (Subject|Marks):</label>
-                <textarea name="table" id="table" cols="30" rows="5"></textarea>
+            <div class = "form-ele">
+                <label for = "table">Enter Marks (Subject|Marks):</label>
+                <textarea name = "table" id = "table" cols = "30" rows = "5"></textarea>
             </div>
             <div class = "form-ele btn">
-                <input type = "submit" name = "submit" value="Submit">
+                <input type = "submit" name = "submit" value = "Submit">
             </div>
 
         </form>
@@ -162,7 +156,7 @@ if (isset($_POST['submit'])) {
         </h1>
         <h1>
             <?php
-                if(isset($_POST['submit'])) {
+                if (isset($_POST['submit'])) {
                     if ($ph_flag) {
                         echo "Phone Number Verified";
                     }
@@ -174,7 +168,7 @@ if (isset($_POST['submit'])) {
         </h1>
         <h2>
             <?php
-                if(isset($_POST['submit'])) {
+                if (isset($_POST['submit'])) {
                     if ($email_flag) {
                         echo $email . " is verified";
                     }
@@ -185,13 +179,13 @@ if (isset($_POST['submit'])) {
             
             ?>
         </h2>
-        <div class="table">
+        <div class = "table">
             <?php 
-                if($_POST['table']!=NULL)
+                if ($_POST['table']!=NULL)
                 {
                     echo $marksTable;
                 } 
-                if($flag == 1){
+                if ($flag == 1){
                     echo "Entered records are not Correct";
                 }
             ?>

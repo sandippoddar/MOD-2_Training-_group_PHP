@@ -21,7 +21,6 @@ body {
     text-transform: uppercase;
     text-align: center;
 }
-
 form {
     display: flex;
     flex-direction: column;
@@ -31,9 +30,7 @@ form {
     padding: 20px;
     border-radius: 20px;
     background-color: #bdcebe;
-
 }
-
 label {
     font-weight: 800;
     font-size: 25px;
@@ -71,7 +68,6 @@ textarea{
     border: 1px solid #000;
     background-color: transparent;
 }
-
 .table table{
     width: 100%;
 }
