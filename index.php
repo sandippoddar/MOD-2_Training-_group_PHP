@@ -1,7 +1,6 @@
 <!-- php code for Task 2 -->
 
 <?php
-
     $targetFile= "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
@@ -19,7 +18,7 @@
 <!-- php code for Task 1 -->
 
 <?php
-    $full_name="";
+    $full_name = "";
     if (isset($_SERVER["REQUEST_METHOD"])=="POST") {
         if (isset($_POST['submit']))
         {
@@ -33,27 +32,25 @@
 <!-- php code  for Task 3 -->
 
 <?php
-$marksTable = '';
-
-if (isset($_POST['submit'])) {
-    $flag=0;
-    $marksTable .= "<h2>Marks Table</h2>";
-    $marksTable .= "<table border='1'style='width: 100%;'>";
-    $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
-    $marks = explode("\n", $_POST['table']);
-    foreach ($marks as $mark) {
-        $marks_array = explode("|", $mark);
-        if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
-            $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
-        } 
-        else{
-            $flag=1;
-            continue;
+    $marksTable = '';
+    if (isset($_POST['submit'])) {
+        $flag = 0;
+        $marksTable .= "<h2>Marks Table</h2>";
+        $marksTable .= "<table border='1'style='width: 100%;'>";
+        $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
+        $marks = explode("\n", $_POST['table']);
+        foreach ($marks as $mark) {
+            $marks_array = explode("|", $mark);
+            if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
+                $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
+            } 
+            else{
+                $flag=1;
+                continue;
+            }
         }
+        $marksTable .= "</table>";
     }
-
-    $marksTable .= "</table>";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,43 +60,42 @@ if (isset($_POST['submit'])) {
 </head>
 <body>
     <div class="container">
-        <form method = "post" action = "index.php" enctype="multipart/form-data">
+        <form method = "post" action = "index.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
                 <label for = "first_name">First Name:*</label>
-                <input type = "text" name = "first_name" id = "first_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class="wrong_fname"></p>
+                <input type = "text" name = "first_name" id = "first_name" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrong_fname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "last_name">Last name:*</label>
-                <input type = "text" name = "last_name" id = "last_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class="wrong_lname"></p>
+                <input type = "text" name = "last_name" id = "last_name" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrong_lname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "full_name"> Full Name: </label>
                 <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
             </div>
             <div class="form-ele">
-                <label for="image">Enter Image</label>
-                <input type="file" name="image" id="image">
+                <label for = "image">Enter Image</label>
+                <input type = "file" name = "image" id = "image">
             </div>
             <div class="form-ele">
                 <label for="table">Enter Marks (Subject|Marks):</label>
-                <textarea name="table" id="table" cols="30" rows="5"></textarea>
+                <textarea name = "table" id="table" cols = "30" rows = "5"></textarea>
             </div>
             <div class = "form-ele btn">
-                <input type = "submit" name = "submit" value="Submit">
+                <input type = "submit" name = "submit" value = "Submit">
             </div>
 
         </form>
         <!-- display image here Task 2-->
-        <div class="image">
-            <img src="<?php 
-            
-                 if (isset($_POST['submit'])) {
+        <div class = "image">
+            <img src = "<?php 
+                if (isset($_POST['submit'])) {
                     echo $targetFile;
-                 }
-            ?>" alt="">
+                }
+            ?>" alt = "">
         </div>
         <!-- display user name here Task 1 -->
         <h1> 
@@ -109,13 +105,13 @@ if (isset($_POST['submit'])) {
                 }
             ?> 
         </h1>
-        <div class="table">
+        <div class = "table">
             <?php 
-                if($_POST["table"]!=NULL)
+                if ($_POST["table"]!=NULL)
                 {
                     echo $marksTable;
                 } 
-                if($flag == 1){
+                if ($flag == 1) {
                     echo "Entered records are not Correct";
                 }
             ?>
