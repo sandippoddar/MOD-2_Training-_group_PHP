@@ -1,11 +1,10 @@
 <!-- php code for Task 2 -->
 
 <?php
-
-    $targetFile= "";
+    $targetFile = "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
-        $targetDir="img/";
+        $targetDir = "img/";
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
         $tmp_name = $_FILES['image']['tmp_name'];
         $fileext = explode('.', $targetFile);
@@ -19,7 +18,7 @@
 <!-- php code for Task 1 -->
 
 <?php
-    $full_name="";
+    $full_name = "";
     if (isset($_SERVER["REQUEST_METHOD"])=="POST") {
         if (isset($_POST['submit']))
         {
@@ -33,42 +32,37 @@
 <!-- php code  for Task 3 -->
 
 <?php
-$marksTable = '';
-
-if (isset($_POST['submit'])) {
-    $flag=0;
-    $marksTable .= "<h2>Marks Table</h2>";
-    $marksTable .= "<table border='1'style='width: 100%;'>";
-    $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
-    $marks = explode("\n", $_POST['table']);
-    foreach ($marks as $mark) {
-        $marks_array = explode("|", $mark);
-        if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
-            $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
-        } 
-        else{
-            $flag=1;
-            continue;
+    $marksTable = '';
+    if (isset($_POST['submit'])) {
+        $flag = 0;
+        $marksTable .= "<h2>Marks Table</h2>";
+        $marksTable .= "<table border='1'style='width: 100%;'>";
+        $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
+        $marks = explode("\n", $_POST['table']);
+        foreach ($marks as $mark) {
+            $marks_array = explode("|", $mark);
+            if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
+                $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
+            } 
+            else{
+                $flag=1;
+                continue;
+            }
         }
+        $marksTable .= "</table>";
     }
-
-    $marksTable .= "</table>";
-}
 ?>
 
 <!-- php code for Task 4 -->
 
 <?php
-
-if (isset($_POST['submit'])) { 
-    $ph_flag=0;
-    $phnumber=$_POST['phone'];
-    if (preg_match('/^\+91[0-9]{10}$/',$phnumber)) {
-        $ph_flag=1;
+    if (isset($_POST['submit'])) { 
+        $ph_flag = 0;
+        $phnumber = $_POST['phone'];
+        if (preg_match('/^\+91[0-9]{10}$/',$phnumber)) {
+            $ph_flag = 1;
+        }
     }
-}
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,15 +88,15 @@ if (isset($_POST['submit'])) {
                 <label for = "full_name"> Full Name: </label>
                 <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
             </div>
-            <div class="form-ele">
+            <div class = "form-ele">
                 <label for="image">Enter Image</label>
                 <input type="file" name="image" id="image">
             </div>
-            <div class="form-ele">
-                <label for="phone">Enter Phone No. (+91)</label>
-                <input type="text" name="phone" id="phone">
+            <div class = "form-ele">
+                <label for = "phone">Enter Phone No. (+91)</label>
+                <input type = "text" name = "phone" id = "phone">
             </div>
-            <div class="form-ele">
+            <div class = "form-ele">
                 <label for="table">Enter Marks (Subject|Marks):</label>
                 <textarea name="table" id="table" cols="30" rows="5"></textarea>
             </div>
@@ -112,8 +106,8 @@ if (isset($_POST['submit'])) {
 
         </form>
         <!-- display image here Task 2-->
-        <div class="image">
-            <img src="<?php 
+        <div class = "image">
+            <img src = "<?php 
             
                  if (isset($_POST['submit'])) {
                     echo $targetFile;
@@ -130,11 +124,11 @@ if (isset($_POST['submit'])) {
         </h1>
         <h1>
             <?php
-                if(isset($_POST['submit'])) {
+                if (isset($_POST['submit'])) {
                     if ($ph_flag) {
                         echo "Phone Number Verified";
                     }
-                    else{
+                    else {
                         echo "Phone Number Not Verified";
                     }
                 }
@@ -142,11 +136,11 @@ if (isset($_POST['submit'])) {
         </h1>
         <div class="table">
             <?php 
-                if($_POST["table"]!=NULL)
+                if ($_POST["table"]!=NULL)
                 {
                     echo $marksTable;
                 } 
-                if($flag == 1){
+                if ($flag == 1){
                     echo "Entered records are not Correct";
                 }
             ?>
