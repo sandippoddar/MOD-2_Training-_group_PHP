@@ -30,7 +30,6 @@ form {
     padding: 20px;
     border-radius: 20px;
     background-color: #bdcebe;
-
 }
 
 label {
@@ -69,7 +68,6 @@ textarea{
     border: 1px solid #000;
     background-color: transparent;
 }
-
 .table table{
     width: 100%;
 }
