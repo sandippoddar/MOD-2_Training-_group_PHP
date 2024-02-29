@@ -59,7 +59,7 @@
     if (isset($_POST['submit'])) { 
         $ph_flag = 0;
         $phnumber = $_POST['phone'];
-        if (preg_match('/^\+91[0-9]{10}$/',$phnumber)) {
+        if (preg_match('/^\+91\s?\d{10}$/',$phnumber)) {
             $ph_flag = 1;
         }
     }
@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class = "container">
         <form method = "post" action = "index.php" enctype="multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
