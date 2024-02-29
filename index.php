@@ -1,7 +1,6 @@
 <!-- php code for Task 2 -->
 
 <?php
-
     $targetFile= "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
@@ -28,32 +27,6 @@
             $full_name = $first_name . ' ' . $last_name;
         }
     }
-?>
-
-<!-- php code  for Task 3 -->
-
-<?php
-$marksTable = '';
-
-if (isset($_POST['submit'])) {
-    $flag=0;
-    $marksTable .= "<h2>Marks Table</h2>";
-    $marksTable .= "<table border='1'style='width: 100%;'>";
-    $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
-    $marks = explode("\n", $_POST['table']);
-    foreach ($marks as $mark) {
-        $marks_array = explode("|", $mark);
-        if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
-            $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
-        } 
-        else{
-            $flag=1;
-            continue;
-        }
-    }
-
-    $marksTable .= "</table>";
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -95,8 +68,7 @@ if (isset($_POST['submit'])) {
         <!-- display image here Task 2-->
         <div class="image">
             <img src="<?php 
-            
-                 if (isset($_POST['submit'])) {
+                if (isset($_POST['submit'])) {
                     echo $targetFile;
                  }
             ?>" alt="">
