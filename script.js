@@ -3,6 +3,7 @@ const first_name = document.querySelector("#first_name");
 const last_name = document.querySelector("#last_name");
 let full_name = document.querySelector("#full_name");
 full_name.value = "";
+
 let regex = /^[a-zA-Z]+$/;
 first_name.addEventListener('input',()=> {
     if (first_name.value==="") {
