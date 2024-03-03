@@ -56,7 +56,7 @@
 <html>
 <head>
     <title>Form Example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
     <div class="container">
@@ -87,17 +87,20 @@
             <div class = "form-ele btn">
                 <input type = "submit" name = "submit" value = "Submit">
             </div>
-
         </form>
+
         <!-- display image here Task 2-->
+
         <div class = "image">
             <img src = "<?php 
                 if (isset($_POST['submit'])) {
                     echo $targetFile;
                 }
-            ?>" alt = "">
+            ?>">
         </div>
+
         <!-- display user name here Task 1 -->
+
         <h1> 
             <?php 
                 if (isset($_POST['submit'])) {
@@ -105,6 +108,7 @@
                 }
             ?> 
         </h1>
+        
         <div class = "table">
             <?php 
                 if ($_POST["table"]!=NULL)
@@ -117,6 +121,6 @@
             ?>
         </div>
     </div>
-    <script src = "script.js"></script>
+    <script src = "./JS/script.js"></script>
 </body>
 </html>
