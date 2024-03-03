@@ -1,4 +1,5 @@
 <?php
+
     $full_name = "";
     if (isset($_SERVER["REQUEST_METHOD"]) == "POST") {
         if (isset($_POST['submit'])) {
@@ -7,6 +8,7 @@
             $full_name = $first_name . ' ' . $last_name;
         }
     }
+
     $targetFile = "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
@@ -19,17 +21,18 @@
             move_uploaded_file($tmp_name, $targetFile);
         }
     }
+
     $ph_flag=0;
     $phnumber = $_POST['phone'];
     if (isset($_POST['submit'])) {
         $ph_flag = 0;
-        
         if (preg_match('/^\+91[0-9]{10}$/', $phnumber)) {
             $ph_flag = 1;
         }
     }
     $marks_array = explode("\n", $_POST['table']);
     $email = $_POST['email'];
+
     use Fpdf\Fpdf;
     require 'vendor/autoload.php';
     $pdf = new Fpdf();
@@ -45,11 +48,12 @@
     $pdf -> cell(0, 20, "STUDENT TABLE", 1, 1, 'C');
     $pdf -> Cell(100,15,"Subject",1,0, "C");
     $pdf -> Cell(0,15,"Marks",1,1, "C");
-    foreach( $marks_array as $mark ) {
+    foreach ($marks_array as $mark) {
         $marks = explode("|", $mark);
-        $pdf->Cell(100,10,$marks[0],1,0, "C");
-        $pdf->Cell(0,10,$marks[1],1,1, "C");
+        $pdf -> Cell(100,10,$marks[0],1,0, "C");
+        $pdf -> Cell(0,10,$marks[1],1,1, "C");
     }
     $pdf-> Image($targetFile,150,35,50,50);
     $pdf->Output();
+
 ?>
