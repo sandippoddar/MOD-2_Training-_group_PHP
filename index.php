@@ -96,11 +96,11 @@ if (isset($_POST['submit'])) {
 <html>
 <head>
     <title>Form Example</title>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel = "stylesheet" href = "./CSS/style.css">
 </head>
 <body>
     <div class = "container">
-        <form method = "post" action = "index.php" enctype="multipart/form-data">
+        <form method = "post" action = "index.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
                 <label for = "first_name">First Name:*</label>
@@ -191,6 +191,6 @@ if (isset($_POST['submit'])) {
             ?>
         </div>
     </div>
-    <script src = "script.js"></script>
+    <script src = "./JS/script.js"></script>
 </body>
 </html>
