@@ -32,48 +32,48 @@
 <html>
 <head>
     <title>Form Example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel = "stylesheet" href = "./CSS/style.css">
 </head>
 <body>
     <div class="container">
-        <form method = "post" action = "index.php" enctype="multipart/form-data">
+        <form method = "post" action = "index.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
                 <label for = "first_name">First Name:</label>
-                <input type = "text" name = "first_name" id = "first_name" maxlength="20" pattern="[A-Za-z]+" required>
+                <input type = "text" name = "first_name" id = "first_name" maxlength = "20" pattern = "[A-Za-z]+" required>
                 <p class="wrong_fname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "last_name">Last name:</label>
-                <input type = "text" name = "last_name" id = "last_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class="wrong_lname"></p>
+                <input type = "text" name = "last_name" id = "last_name" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrong_lname"></p>
             </div>
             <div class = "form-ele">
                 <label for = "full_name"> Full Name: </label>
                 <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
             </div>
-            <div class="form-ele">
-                <label for="image">Enter Image</label>
-                <input type="file" name="image" id="image">
-            </div>
-            <div class="form-ele">
-                <label for="table">Enter Marks (Subject|Marks):</label>
-                <textarea name="table" id="table" cols="30" rows="5"></textarea>
+            <div class = "form-ele">
+                <label for = "image">Enter Image</label>
+                <input type = "file" name = "image" id = "image">
             </div>
             <div class = "form-ele btn">
-                <input type = "submit" name = "submit" value="Submit">
+                <input type = "submit" name = "submit" value = "Submit">
             </div>
 
         </form>
+
         <!-- display image here Task 2-->
-        <div class="image">
-            <img src="<?php 
+
+        <div class = "image">
+            <img src = "<?php 
                 if (isset($_POST['submit'])) {
                     echo $targetFile;
                  }
-            ?>" alt="">
+            ?>">
         </div>
+
         <!-- display user name here Task 1 -->
+
         <h1> 
             <?php 
                 if (isset($_POST['submit'])) {
@@ -81,18 +81,7 @@
                 }
             ?> 
         </h1>
-        <div class="table">
-            <?php 
-                if($_POST["table"]!=NULL)
-                {
-                    echo $marksTable;
-                } 
-                if($flag == 1){
-                    echo "Entered records are not Correct";
-                }
-            ?>
-        </div>
     </div>
-    <script src = "script.js"></script>
+    <script src = "./JS/script.js"></script>
 </body>
 </html>

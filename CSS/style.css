@@ -3,11 +3,13 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body {
     display: flex;
     justify-content: center;
     font-family: Roboto,sans-serif;
 }
+
 .container {
     width: 500px;
     padding: 20px;
@@ -17,10 +19,12 @@ body {
     gap: 20px;
 
 }
+
 .container h1 {
     text-transform: uppercase;
     text-align: center;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -30,14 +34,15 @@ form {
     padding: 20px;
     border-radius: 20px;
     background-color: #bdcebe;
-
 }
 
 label {
     font-weight: 800;
     font-size: 25px;
 }
+
 form input {
+    width: 100%;
     background-color: transparent;
     color: #000;
     padding: 10px;
@@ -45,30 +50,19 @@ form input {
     font-size: 20px;
     border-radius: 20px;
 }
-form .form-ele:nth-child(-n+5) input {
-    width: 100%;
-}
+
 input:focus {
     background-color: transparent;
     outline: none;
 }
+
 .btn input {
     padding: 10px 30px;
     font-size: 20px;
     color: #fff;
     background-color: #000;
 }
+
 .image img {
-    width: 100%;
-}
-textarea{
-    width: 100%;
-    border-radius: 20px;
-    padding: 15px;
-    font-size: 20px;
-    border: 1px solid #000;
-    background-color: transparent;
-}
-.table table{
     width: 100%;
 }
