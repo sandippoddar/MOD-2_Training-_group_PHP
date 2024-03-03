@@ -68,7 +68,7 @@
 <html>
 <head>
     <title>Form Example</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
     <div class = "container">
@@ -112,7 +112,7 @@
                  if (isset($_POST['submit'])) {
                     echo $targetFile;
                  }
-            ?>" alt="">
+            ?>">
         </div>
         <!-- display user name here Task 1 -->
         <h1> 
@@ -146,6 +146,6 @@
             ?>
         </div>
     </div>
-    <script src = "script.js"></script>
+    <script src = "./JS/script.js"></script>
 </body>
 </html>
