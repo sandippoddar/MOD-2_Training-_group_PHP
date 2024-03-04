@@ -1,10 +1,10 @@
 <?php
 
-    $full_name = "";
+    $fullName = "";
     if (isset($_SERVER["REQUEST_METHOD"]) == "POST" && isset($_POST['submit'])) {
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $full_name = $first_name . ' ' . $last_name;
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $fullName = $firstName . ' ' . $lastName;
     }
 
 ?>
@@ -18,27 +18,28 @@
     <div class = "container">
         <form method = "post" action = "index.php">
             <div class = "form-ele">
-                <label for = "first_name">First Name:</label>
-                <input type = "text" name = "first_name" id = "first_name" pattern = "[A-Za-z]+" required>
-                <p class="wrong_fname"></p>
+                <label for = "firstName">First Name:*</label>
+                <input type = "text" name = "firstName" id = "firstName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongFname"></p>
             </div>
             <div class = "form-ele">
-                <label for = "last_name">Last name:</label>
-                <input type = "text" name = "last_name" id = "last_name" pattern = "[A-Za-z]+" required>
-                <p class = "wrong_lname"></p>
+                <label for = "lastName">Last name:*</label>
+                <input type = "text" name = "lastName" id = "lastName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongLname"></p>
             </div>
             <div class = "form-ele">
-                <label for = "full_name"> Full Name: </label>
-                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
+                <label for = "fullName"> Full Name: </label>
+                <input type = "text" name = "fullName" id = "fullName" value = "" disabled>
             </div>
             <div class = "form-ele" class = "btn">
                 <input type = "submit" name = "submit" value = "Submit">
             </div>   
         </form>
+        <!-- Display User Full Name here. -->
         <h1> 
             <?php 
                 if (isset($_POST['submit'])) {
-                    echo "Hello " . $full_name; 
+                    echo "Hello " . $fullName; 
                 }
             ?> 
         </h1>
