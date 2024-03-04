@@ -1,52 +1,52 @@
 // Storing HTML elements. 
-const first_name = document.querySelector("#first_name");
-const last_name = document.querySelector("#last_name");
-let full_name = document.querySelector("#full_name");
+const firstName = document.querySelector("#firstName");
+const lastName = document.querySelector("#lastName");
+let fullName = document.querySelector("#fullName");
 let regex = /^[a-zA-Z]+$/;
 
 /* Function for showing Error message while user enter any wrong input. */
 
-function showError(Name,class_name) {
+function showError(Name,className) {
     if (Name === "") {
-        document.querySelector('.' + class_name).textContent = "";
+        document.querySelector('.' + className).textContent = "";
     }
     else if (!regex.test(Name)) {
-        document.querySelector('.' + class_name).textContent = "Enter Only Alphabets";
+        document.querySelector('.' + className).textContent = "Enter Only Alphabets";
     }
     else {
-        document.querySelector('.' + class_name).textContent = "";
+        document.querySelector('.' + className).textContent = "";
     }
 }
 
-first_name.addEventListener('input', () => {
-    showError(first_name.value,'wrong_fname');
+firstName.addEventListener('input', () => {
+    showError(firstName.value,'wrongFname');
 });
-last_name.addEventListener('input', () => {
-    showError(last_name.value,'wrong_lname');
+lastName.addEventListener('input', () => {
+    showError(lastName.value,'wrongLname');
 });
 
 /* Function for update the full_name field. */
 
 function updateValue() {
-    let regex_1 = /[^a-zA-Z]/g;
-    const first_name1 = first_name.value.replace(regex_1, '');
-    const last_name1 = last_name.value.replace(regex_1, '');
-    if (regex.test(first_name1)) {
-        if (regex.test(last_name1)) {
-            full_name.value = first_name1 + " " + last_name1;
+    let regex1 = /[^a-zA-Z]/g;
+    const firstName1 = firstName.value.replace(regex1, '');
+    const lastName1 = lastName.value.replace(regex1, '');
+    if (regex.test(firstName1)) {
+        if (regex.test(lastName1)) {
+            fullName.value = firstName1 + " " + lastName1;
         }
         else {
-            full_name.value = first_name1 + " ";
+            fullName.value = firstName1 + " ";
         }
     }
     else {
-        if (regex.test(last_name1)) {
-            full_name.value = " " + last_name1;
+        if (regex.test(lastName1)) {
+            fullName.value = " " + lastName1;
         }
         else {
-            full_name.value = "";
+            fullName.value = "";
         }
     }
 }
-first_name.addEventListener('input', updateValue);
-last_name.addEventListener('input', updateValue);
+firstName.addEventListener('input', updateValue);
+lastName.addEventListener('input', updateValue);
