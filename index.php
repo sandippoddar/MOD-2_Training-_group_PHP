@@ -47,10 +47,10 @@
 <html>
 <head>
     <title>Form Example</title>
-    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel = "stylesheet" href = "./CSS/style.css">
 </head>
 <body>
-    <div class="container">
+    <div class = "container">
         <form method = "post" action = "index.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
@@ -80,7 +80,7 @@
             </div>
         </form>
 
-        <!-- display image here Task 2-->
+        <!-- Display image here Task 2.-->
 
         <div class = "image">
             <img src = "<?php 
@@ -90,7 +90,7 @@
             ?>">
         </div>
 
-        <!-- display user name here Task 1 -->
+        <!-- Display user name here Task 1. -->
 
         <h1> 
             <?php 
@@ -99,6 +99,8 @@
                 }
             ?> 
         </h1>
+
+        <!-- Display table here. -->
         
         <div class = "table">
             <?php 
