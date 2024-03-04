@@ -1,15 +1,18 @@
 <?php
+
     session_start();
+    /*Check if the session variable is set or not if not set then go back to Login page.*/
     if (!isset($_SESSION["user_name"])) {
         header("location: login.php");
         exit();
     }
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Q_4</title>
 </head>
 <body>
