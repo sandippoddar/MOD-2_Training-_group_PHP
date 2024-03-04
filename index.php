@@ -1,32 +1,25 @@
-<!-- php code for Task 2 -->
-
 <?php
+
     $targetFile= "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
-        $targetDir="img/";
+        $targetDir = "img/";
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $fileext = explode('.', $targetFile);
-        $file_type = strtolower($fileext[1]);
-        if ($file_type == "jpg" || $file_type == "jpeg" || $file_type == "png") {
-            move_uploaded_file($tmp_name,$targetFile);
+        $tmpName = $_FILES['image']['tmp_name'];
+        $fileExt = explode('.', $targetFile);
+        $fileType = strtolower($fileExt[1]);
+        if ($fileType == "jpg" || $fileType == "jpeg" || $fileType == "png") {
+            move_uploaded_file($tmpName,$targetFile);
         }
     }
-?>
 
-<!-- php code for Task 1 -->
-
-<?php
-    $full_name="";
-    if (isset($_SERVER["REQUEST_METHOD"])=="POST") {
-        if (isset($_POST['submit']))
-        {
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $full_name = $first_name . ' ' . $last_name;
-        }
+    $fullName = "";
+    if (isset($_SERVER["REQUEST_METHOD"]) == "POST" && isset($_POST['submit'])) {
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $fullName = $firstName . ' ' . $lastName;
     }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,19 +32,22 @@
         <form method = "post" action = "index.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
             <div class = "form-ele">
-                <label for = "first_name">First Name:</label>
-                <input type = "text" name = "first_name" id = "first_name" maxlength = "20" pattern = "[A-Za-z]+" required>
-                <p class="wrong_fname"></p>
+                <label for = "firstName">First Name:*</label>
+                <input type = "text" name = "firstName" id = "firstName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongFname"></p>
             </div>
+
             <div class = "form-ele">
-                <label for = "last_name">Last name:</label>
-                <input type = "text" name = "last_name" id = "last_name" maxlength = "20" pattern = "[A-Za-z]+" required>
-                <p class = "wrong_lname"></p>
+                <label for = "lastName">Last name:*</label>
+                <input type = "text" name = "lastName" id = "lastName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongLname"></p>
             </div>
+
             <div class = "form-ele">
-                <label for = "full_name"> Full Name: </label>
-                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
+                <label for = "fullName"> Full Name: </label>
+                <input type = "text" name = "fullName" id = "fullName" value = "" disabled>
             </div>
+
             <div class = "form-ele">
                 <label for = "image">Enter Image</label>
                 <input type = "file" name = "image" id = "image">
@@ -59,10 +55,9 @@
             <div class = "form-ele btn">
                 <input type = "submit" name = "submit" value = "Submit">
             </div>
-
         </form>
 
-        <!-- display image here Task 2-->
+        <!-- Display image here Task 2.-->
 
         <div class = "image">
             <img src = "<?php 
@@ -72,12 +67,12 @@
             ?>">
         </div>
 
-        <!-- display user name here Task 1 -->
+        <!-- Display user name here Task 1. -->
 
         <h1> 
             <?php 
                 if (isset($_POST['submit'])) {
-                    echo "Hello " . $full_name; 
+                    echo "Hello " . $fullName; 
                 }
             ?> 
         </h1>
