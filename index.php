@@ -1,40 +1,38 @@
 <?php
 
-    $targetFile = "";
+    $targetFile= "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
         $targetDir = "img/";
         $targetFile = $targetDir . basename($_FILES["image"]["name"]);
-        $tmp_name = $_FILES['image']['tmp_name'];
-        $fileext = explode('.', $targetFile);
-        $file_type = strtolower($fileext[1]);
-        if ($file_type == "jpg" || $file_type == "jpeg" || $file_type == "png") {
-            move_uploaded_file($tmp_name,$targetFile);
+        $tmpName = $_FILES['image']['tmp_name'];
+        $fileExt = explode('.', $targetFile);
+        $fileType = strtolower($fileExt[1]);
+        if ($fileType == "jpg" || $fileType == "jpeg" || $fileType == "png") {
+            move_uploaded_file($tmpName,$targetFile);
         }
     }
 
-    $full_name = "";
-    if (isset($_SERVER["REQUEST_METHOD"]) == "POST") {
-        if (isset($_POST['submit']))
-        {
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
-            $full_name = $first_name . ' ' . $last_name;
-        }
+    $fullName = "";
+    if (isset($_SERVER["REQUEST_METHOD"]) == "POST" && isset($_POST['submit'])) {
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $fullName = $firstName . ' ' . $lastName;
     }
 
     $marksTable = '';
-    $flag = 0;
     if (isset($_POST['submit'])) {
-        $flag=0;
+        $flag = 0;
         $marksTable .= "<h2>Marks Table</h2>";
-        $marksTable .= "<table border = '1'style = 'width : 100%;'>";
+        $marksTable .= "<table border = '1'style = 'width: 100%;'>";
         $marksTable .= "<tr><th>Subject</th><th>Marks</th></tr>";
         $marks = explode("\n", $_POST['table']);
         foreach ($marks as $mark) {
-            $marks_array = explode("|", $mark);
-            if (preg_match('/^[A-Za-z\s]+$/', $marks_array[0]) && preg_match('/^[0-9\s]+$/', $marks_array[1])) {
-                $marksTable .= "<tr><td>$marks_array[0]</td><td>$marks_array[1]</td></tr>";
+            $marksArray = explode("|", $mark);
+            $regexSubject = '/^[A-Za-z\s]+$/';
+            $regexMarks = '/^[0-9\s]+$/';
+            if (preg_match($regexSubject, $marksArray[0]) && preg_match($regexMarks, $marksArray[1])) {
+                $marksTable .= "<tr><td>$marksArray[0]</td><td>$marksArray[1]</td></tr>";
             } 
             else {
                 $flag = 1;
@@ -45,22 +43,22 @@
     }
 
     if (isset($_POST['submit'])) { 
-        $ph_flag = 0;
-        $phnumber = $_POST['phone'];
+        $phFlag = 0;
+        $phNumber = $_POST['phone'];
         $regex = '/^\+91[0-9]{10}$/';
-        if (preg_match($regex,$phnumber)) {
-            $ph_flag = 1;
+        if (preg_match($regex,$phNumber)) {
+            $phFlag = 1;
         }
     }
 
-    $email_flag = 0;
+    $emailFlag = 0;
     $email = "";
     if (isset($_POST['submit'])) {
         $email = $_POST['email'];
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $api_key = '1e78c4c89237488db4366aee49b9a7e7';
+            $apiKey = '1e78c4c89237488db4366aee49b9a7e7';
             $ch = curl_init();
-            curl_setopt_array($ch, [CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$api_key&email=$email", 
+            curl_setopt_array($ch, [CURLOPT_URL => "https://emailvalidation.abstractapi.com/v1?api_key=$apiKey&email=$email", 
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
@@ -70,7 +68,7 @@
             curl_close($ch);
             $data = json_decode($response, true);
             if ($data['deliverability'] === "DELIVERABLE" && !$data["is_disposable_email"]["value"]) {
-                $email_flag = 1;
+                $emailFlag = 1;
             }
         }
     }
@@ -88,20 +86,18 @@
             <h1>PHP BASIC</h1>
 
             <div class = "form-ele">
-                <label for = "first_name">First Name:*</label>
-                <input type = "text" name = "first_name" id = "first_name" maxlength = "20" pattern = "[A-Za-z]+" required>
-                <p class = "wrong_fname"></p>
+                <label for = "firstName">First Name:*</label>
+                <input type = "text" name = "firstName" id = "firstName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongFname"></p>
             </div>
-
             <div class = "form-ele">
-                <label for = "last_name">Last name:*</label>
-                <input type = "text" name = "last_name" id = "last_name" maxlength="20" pattern="[A-Za-z]+" required>
-                <p class = "wrong_lname"></p>
+                <label for = "lastName">Last name:*</label>
+                <input type = "text" name = "lastName" id = "lastName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongLname"></p>
             </div>
-
             <div class = "form-ele">
-                <label for = "full_name"> Full Name: </label>
-                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
+                <label for = "fullName"> Full Name: </label>
+                <input type = "text" name = "fullName" id = "fullName" value = "" disabled>
             </div>
 
             <div class = "form-ele">
@@ -147,28 +143,23 @@
         <!-- Display User Phone Number. -->
         <h1>
             <?php
-                if (isset($_POST['submit'])) {
-                    if ($ph_flag) {
-                        echo "Phone Number Verified";
-                    }
-                    else {
-                        echo "Phone Number Not Verified";
-                    }
+                if (isset($_POST['submit']) && $phFlag) {
+                    echo "Phone Number Verified";
+                }
+                else {
+                    echo "Phone Number Not Verified";
                 }
             ?>
         </h1>
         <!-- Display Email verified or not. -->
         <h2>
             <?php
-                if (isset($_POST['submit'])) {
-                    if ($email_flag) {
+                if (isset($_POST['submit']) && $emailFlag) {
                         echo $email . " is verified";
-                    }
-                    else {
-                        echo $email . " is not verified";
-                    }
                 }
-            
+                else {
+                    echo $email . " is not verified";
+                }
             ?>
         </h2>
         <!-- Display table here. -->
