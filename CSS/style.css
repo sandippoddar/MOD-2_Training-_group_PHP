@@ -15,7 +15,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-
 }
 .container h1 {
     text-transform: uppercase;
@@ -31,7 +30,6 @@ form {
     border-radius: 20px;
     background-color: #bdcebe;
 }
-
 label {
     font-weight: 800;
     font-size: 25px;
