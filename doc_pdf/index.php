@@ -8,21 +8,22 @@
     <div class = "container">
         <form method = "post" action = "pdf.php" enctype = "multipart/form-data">
             <h1>PHP BASIC</h1>
+            
             <div class = "form-ele">
-                <label for = "first_name">First Name:*</label>
-                <input type = "text" name = "first_name" id = "first_name" maxlength = "20" pattern = "[A-Za-z]+" required>
-                <p class = "wrong_fname"></p>
+                <label for = "firstName">First Name:*</label>
+                <input type = "text" name = "firstName" id = "firstName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongFname"></p>
             </div>
 
             <div class = "form-ele">
-                <label for = "last_name">Last name:*</label>
-                <input type = "text" name = "last_name" id = "last_name" maxlength = "20" pattern = "[A-Za-z]+" required>
-                <p class = "wrong_lname"></p>
+                <label for = "lastName">Last name:*</label>
+                <input type = "text" name = "lastName" id = "lastName" maxlength = "20" pattern = "[A-Za-z]+" required>
+                <p class = "wrongLname"></p>
             </div>
 
             <div class = "form-ele">
-                <label for = "full_name"> Full Name: </label>
-                <input type = "text" name = "full_name" id = "full_name" value = "" disabled>
+                <label for = "fullName"> Full Name: </label>
+                <input type = "text" name = "fullName" id = "fullName" value = "" disabled>
             </div>
 
             <div class = "form-ele">
