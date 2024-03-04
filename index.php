@@ -1,6 +1,6 @@
 <?php
 
-    $targetFile= "";
+    $targetFile = "";
     if (isset($_POST["submit"])) {
         $file = $_FILES['image'];
         $targetDir = "img/";
@@ -90,11 +90,13 @@
                 <input type = "text" name = "firstName" id = "firstName" maxlength = "20" pattern = "[A-Za-z]+" required>
                 <p class = "wrongFname"></p>
             </div>
+
             <div class = "form-ele">
                 <label for = "lastName">Last name:*</label>
                 <input type = "text" name = "lastName" id = "lastName" maxlength = "20" pattern = "[A-Za-z]+" required>
                 <p class = "wrongLname"></p>
             </div>
+
             <div class = "form-ele">
                 <label for = "fullName"> Full Name: </label>
                 <input type = "text" name = "fullName" id = "fullName" value = "" disabled>
