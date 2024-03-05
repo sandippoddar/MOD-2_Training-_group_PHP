@@ -1,7 +1,6 @@
 <?php
 
     use PHPMailer\PHPMailer\PHPMailer;
-
     require 'vendor/autoload.php';
 
     if(isset($_POST['submit'])) {
