@@ -9,6 +9,10 @@ html,body {
     font-family: Roboto,sans-serif;
 }
 
+section {
+    padding: 50px 0;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -64,6 +68,12 @@ button a {
     font-size: 16px;
     background-color: #fff;
     font-weight: 600;
+    transition: 0.2s ease all;
+}
+
+button a:hover {
+    background-color: #ffa500;
+    color: #fff;
 }
 
 .image_div {

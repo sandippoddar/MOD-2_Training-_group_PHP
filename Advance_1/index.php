@@ -1,18 +1,21 @@
 <?php
 
-    /* Function For getting the array format of API using php curl */
-
-    function callApi($url) {
-        $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $data = json_decode($response, true);
-        return $data;
+    /* Class to call the API. */
+    class API {
+        public $url;
+        function __construct($url) {
+            $this->url = $url;
+        }
+        public function callApi() {
+            require 'vendor/autoload.php';
+            $client = new GuzzleHttp\Client();
+            $response = $client->request('GET', $this->url);
+            $data = json_decode($response->getBody(), true);
+            return $data; 
+        }
     }
 
-    /* Created Class. */
+    /* Create a Class for the fields. */
 
     class Task {
         public $id;
@@ -34,7 +37,7 @@
         }
     }
     $fieldArray = array();
-    $data = callApi('https://www.innoraft.com/jsonapi/node/services');
+    $data = (new API('https://www.innoraft.com/jsonapi/node/services')) -> callApi();
 
     for ($i = 0; $i < count($data['data']); $i++) {
         if ($data['data'][$i]['attributes']['field_services']['value'] != NULL && $i > 11) {
@@ -43,12 +46,12 @@
             $title = $data['data'][$i]['attributes']['title'];
             $serviceTitle = $data['data'][$i]['attributes']['field_secondary_title']['value'];
             $fieldService = ($data['data'][$i]['attributes']['field_services']['value']);
-            $fieldImage = 'https://www.innoraft.com' . callApi($data['data'][$i]['relationships']['field_image']['links']['related']['href'])['data']['attributes']['uri']['url'];
+            $fieldImage = 'https://www.innoraft.com' . (new API($data['data'][$i]['relationships']['field_image']['links']['related']['href'])) -> callApi()['data']['attributes']['uri']['url'];
             $alias = 'https://www.innoraft.com' . $data['data'][$i]['attributes']['path']['alias'];
 
-            $fieldIconCall1 = callApi($data['data'][$i]['relationships']['field_service_icon']['links']['related']['href']);
-            for($icon = 0; $icon < count($fieldIconCall1['data']); $icon++) {
-                $fieldIconCall2 = callApi($fieldIconCall1['data'][$icon]['relationships']['field_media_image']['links']['related']['href']);
+            $fieldIconCall1 = (new API($data['data'][$i]['relationships']['field_service_icon']['links']['related']['href'])) -> callApi();
+            for ($icon = 0; $icon < count($fieldIconCall1['data']); $icon++) {
+                $fieldIconCall2 = (new API($fieldIconCall1['data'][$icon]['relationships']['field_media_image']['links']['related']['href'])) -> callApi();
                 $iconEle = 'https://www.innoraft.com' . $fieldIconCall2['data']['attributes']['uri']['url'];
                 $iconArray[] = $iconEle; 
             }
@@ -60,23 +63,54 @@
     
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset = "UTF-8">
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
     <title>Assignment 1</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel = "stylesheet" href = "./CSS/style.css">
 </head>
 <body>
-    <section>
-            <?php for($i = 0; $i < count($fieldArray); $i++) : ?>
-                <?php if ($i % 2 == 0) : ?>
+    <?php for($i = 0; $i < count($fieldArray); $i++) : ?>
+        <?php if ($i % 2 == 0) : ?>
+            <section>
+                <div class = "container">
+                    <div class = "left ele">
+                        <div class = "title"><?php echo $fieldArray[$i] -> serviceTitle; ?></div>
+
+                        <div class="image_div">
+                            <!-- Iterate for getting Image Icons. -->
+                            <?php for($icon = 0; $icon < $fieldArray[$i] -> getArrayLength(); $icon++) : ?>
+                                <div class = "img-ele">
+                                    <img src = "<?php echo $fieldArray[$i] -> iconArray[$icon]; ?>">
+                                </div>
+                            <?php endfor; ?>
+                        </div>
+
+                        <div class = "fieldservice">
+                            <?php echo $fieldArray[$i] -> fieldService; ?>
+                        </div>
+
+                        <button><a href = "<?php echo $fieldArray[$i] -> alias; ?>">Explore More</a></button>
+                    </div>
+
+                    <div class = "right ele">
+                        <img src = "<?php echo $fieldArray[$i] -> fieldImage; ?>">
+                    </div>
+                </div>
+            </section>
+
+            <?php else : ?>
+                <section>
                     <div class = "container">
+                        <div class = "right ele">
+                            <img src = "<?php echo $fieldArray[$i] -> fieldImage; ?>">
+                        </div>
+
                         <div class = "left ele">
                             <div class = "title"><?php echo $fieldArray[$i] -> serviceTitle; ?></div>
 
-                            <div class="image_div">
-                                 <!-- Iterate for getting Image Icons. -->
+                            <div class = "image_div">
                                 <?php for($icon = 0; $icon < $fieldArray[$i] -> getArrayLength(); $icon++) : ?>
                                     <div class = "img-ele">
                                         <img src = "<?php echo $fieldArray[$i] -> iconArray[$icon]; ?>">
@@ -90,38 +124,9 @@
 
                             <button><a href = "<?php echo $fieldArray[$i] -> alias; ?>">Explore More</a></button>
                         </div>
-
-                        <div class = "right ele">
-                            <img src = "<?php echo $fieldArray[$i] -> fieldImage; ?>">
-                        </div>
                     </div>
-
-                    <?php else : ?>
-                        <div class = "container">
-                            <div class = "right ele">
-                                <img src = "<?php echo $fieldArray[$i] -> fieldImage; ?>">
-                            </div>
-
-                            <div class = "left ele">
-                                <div class = "title"><?php echo $fieldArray[$i] -> serviceTitle; ?></div>
-
-                                <div class = "image_div">
-                                    <?php for($icon = 0; $icon < $fieldArray[$i] -> getArrayLength(); $icon++) : ?>
-                                        <div class = "img-ele">
-                                            <img src = "<?php echo $fieldArray[$i] -> iconArray[$icon]; ?>">
-                                        </div>
-                                    <?php endfor; ?>
-                                </div>
-
-                                <div class = "fieldservice">
-                                    <?php echo $fieldArray[$i] -> fieldService; ?>
-                                </div>
-
-                                <button><a href = "<?php echo $fieldArray[$i] -> alias; ?>">Explore More</a></button>
-                            </div>
-                        </div>
-                <?php endif; ?>
-            <?php endfor; ?> 
-    </section>
+                </section>
+        <?php endif; ?>
+    <?php endfor; ?> 
 </body>
 </html>
