@@ -1,7 +1,12 @@
 <?php
+
 require 'SendEmail.php';
-$ob = new SendEmail();
-$emailCheck = $ob->checkEmail();
+if (isset($_POST['submit'])) {
+  $emailObj = new SendEmail();
+  $email = $_POST['email'];
+  $emailCheck = $emailObj->configureMail($email);
+  $validateEmail = $emailObj->validateEmail($email);
+}
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +21,7 @@ $emailCheck = $ob->checkEmail();
 
 <body>
   <div class="container">
-    <form action="SendEmail.php" method="post">
+    <form action="index.php" method="post">
       <h1>PHP Advance Task2</h1>
       <div class="form-ele">
         <label for="email">Enter email:</label>
@@ -27,11 +32,11 @@ $emailCheck = $ob->checkEmail();
     <h1>
       <?php
       if (isset($_POST["submit"])) {
-        if ($emailCheck) {
+        if ($emailCheck && $validateEmail) {
           echo "Message has been sent successfully";
         }
         else {
-          echo "Message cant be send";
+          echo "Message cant be send Email does not exist.";
         }
       }
       ?>
