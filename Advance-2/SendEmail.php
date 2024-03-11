@@ -1,9 +1,8 @@
 <?php
-
+  require 'vendor/autoload.php';
   use PHPMailer\PHPMailer\PHPMailer;
   use GuzzleHttp\Client;
   use Dotenv\Dotenv as Dotenv;
-  require 'vendor/autoload.php';
 
   /**
    * 
@@ -37,7 +36,7 @@
 
     public function __construct() {
       $dotenv = Dotenv::createImmutable(__DIR__);
-      $dotenv->load();
+      $dotenv->safeLoad();
       $this->mail = new PHPMailer(TRUE);
     }
 
@@ -106,4 +105,3 @@
     } 
   }
 
-?>

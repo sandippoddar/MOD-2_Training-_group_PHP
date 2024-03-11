@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
       <h1>PHP Advance Task2</h1>
       <div class="form-ele">
         <label for="email">Enter email:</label>
-        <input type="email" name="email" id="email">
+        <input type="text" name="email" id="email">
       </div>
       <input type="submit" value="Submit" name="submit">
     </form>
