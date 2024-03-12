@@ -1,5 +1,7 @@
 <?php
 
+  require 'vendor/autoload.php';
+  use Dotenv\Dotenv as Dotenv;  
   /**
    * 
    * class ConnectDB
@@ -18,7 +20,7 @@
      * 
      */
 
-    private $servername = "localhost";
+    private $servername = $_ENV['serverName'];
 
     /**
      * 
@@ -28,7 +30,7 @@
      * 
      */
 
-    private $username = "sandip";
+    private $username = $_ENV['userName'];
 
     /**
      * 
@@ -37,7 +39,7 @@
      * store Password of User.
      * 
      */
-    private $password = "sandip1234@";
+    private $password = $_ENV['password'];
 
     /**
      * 
@@ -46,7 +48,7 @@
      * Store Database name.
      */
 
-    private $dbname = "exampleDB";
+    private $dbname = $_ENV['dbName'];
 
     /**
      * 
@@ -59,6 +61,8 @@
     private $conn;
 
     public function __construct() {
+      $dotenv = Dotenv::createImmutable(__DIR__);
+      $dotenv->load();
       $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
       if (!$this->conn) {
         die("Connection Failed". mysqli_error($this->conn));
