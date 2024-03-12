@@ -74,7 +74,7 @@
 
     /**
      * 
-     * here getConnection() function is use to
+     * Here getConnection() function is use to
      * return the conn variable whenever object of
      * the class is created and will call the function.
      * 
