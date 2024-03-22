@@ -1,7 +1,7 @@
 <?php
-
-  require 'Field.php';
-  $fieldArray = fieldService();
+  require 'FieldService.php';
+  $ob = new FieldService();
+  $fieldArray = $ob->FieldArray();
  
 ?>
 <!DOCTYPE html>
