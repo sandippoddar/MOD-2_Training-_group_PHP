@@ -1,8 +1,11 @@
 <?php
   require 'vendor/autoload.php';
+  require_once '../DotEnvHandler.php';
   use PHPMailer\PHPMailer\PHPMailer;
   use GuzzleHttp\Client;
-  use Dotenv\Dotenv as Dotenv;
+  $dotOb = new DotenvHandler();
+  $dotOb->dotEnv();
+  
 
   /**
    * 
@@ -17,7 +20,7 @@
 
     /**
      * 
-     * @var PHPMailer.
+     * @var PHPMailer
      * 
      * Stores object of PHPMailer class.
      * 
@@ -35,8 +38,6 @@
      */
 
     public function __construct() {
-      $dotenv = Dotenv::createImmutable(__DIR__);
-      $dotenv->safeLoad();
       $this->mail = new PHPMailer(TRUE);
     }
 
